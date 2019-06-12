@@ -1,14 +1,28 @@
 <template>
   <div>
-    <v-navigation-drawer app temporary></v-navigation-drawer>
+    <v-navigation-drawer app temporary v-model="sideNav">
+      <v-list>
+        <v-list-tile v-for="(link, i) in links" :key="i" :to="link.url">
+          <v-list-tile-action>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title v-text="link.title"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+
+    </v-navigation-drawer>
     <v-toolbar app dark color="teal lighten-3">
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click="sideNav = !sideNav"></v-toolbar-side-icon>
       <v-toolbar-title>Online Vue Store</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat>Link One</v-btn>
-        <v-btn flat>Link Two</v-btn>
-        <v-btn flat>Link Three</v-btn>
+        <v-btn v-for="(link, i) in links" :key="i" :to="link.url" flat>
+          <v-icon left>{{ link.icon}}</v-icon>
+          {{link.title}}
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -20,5 +34,38 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    data() {
+      return {
+        sideNav: false,
+        links: [{
+            title: 'Login',
+            icon: 'account_box',
+            url: '/login'
+          },
+          {
+            title: 'Register',
+            icon: 'face',
+            url: '/register'
+          },
+          {
+            title: 'Cart',
+            icon: 'shopping_cart',
+            url: '/checkout'
+          },
+          {
+            title: 'New Product',
+            icon: 'add',
+            url: '/new'
+          },
+          {
+            title: 'My Products',
+            icon: 'list',
+            url: '/list'
+          }
+        ]
+
+      }
+    }
+  }
 </script>
