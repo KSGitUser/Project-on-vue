@@ -16,7 +16,11 @@
     </v-navigation-drawer>
     <v-toolbar app dark color="teal lighten-3">
       <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-toolbar-side-icon>
-      <v-toolbar-title>Online Vue Store</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" class="pointer">
+          Online Vue Store
+        </router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-for="(link, i) in links" :key="i" :to="link.url" flat>
@@ -69,3 +73,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .pointer {
+    cursor: pointer;
+  }
+</style>
