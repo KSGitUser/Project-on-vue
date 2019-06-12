@@ -42,7 +42,7 @@
       }
     },
     methods: {
-      markDone(oeder) {
+      markDone(order) {
         order.done = true;
       }
     }

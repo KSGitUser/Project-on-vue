@@ -18,7 +18,7 @@
           </v-text-field>
           <v-textarea name="description" label="Description Product" type="text" multi-line v-model="description">
           </v-textarea>
-          </v-text-field>
+
         </v-form>
         <v-layout mb-3>
           <v-flex xs12>
