@@ -59,7 +59,7 @@
     },
     methods: {
       onLogout() {
-        this.$store.dispatch('onLogout')
+        this.$store.dispatch('logoutUser')
         this.$router.push('/')
       }
     },
