@@ -22,6 +22,7 @@ export default new Router({
     },
     {
       path: '/product/:id',
+      props: true, // для того чтобы id был передан как параметр в компонент
       name: 'product',
       component: Product,
     },

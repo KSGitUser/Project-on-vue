@@ -3,30 +3,30 @@
     <section class="product mt-3 elevation-10">
       <v-layout row wrap>
         <v-flex xs12 lg6>
-          <v-img src="https://image.ibb.co/fZzq1o/Lenovo_Legion_Y520.jpg" class="product_img"></v-img>
+          <v-img :src="product.imageSrc" class="product_img"></v-img>
         </v-flex>
         <v-flex xs12 lg6>
           <div class="product_info">
-            <h5 class="product_title display-1 mb-3 mt-2">Lorem ipsum dolor</h5>
+            <h5 class="product_title display-1 mb-3 mt-2">{{ product.title }}</h5>
             <p class="product_category title">
-              <span class="product_title">Vendor: </span>Lorem
+              <span class="product_title">Vendor:
+              </span>{{ product.vendor.charAt(0).toUpperCase() + product.vendor.substr(1) }}
             </p>
             <p class="product_price title">
-              <span class="product_title">Price: </span>$ 1000
+              <span class="product_title">Price: </span>${{ product.price }}
             </p>
             <p class="product_color title">
               <span class="product_title">Color: </span>
-              <span :title="'purple'" :style="{ backgroundColor: 'purple' }" class="product_color_bg">
+              <span :title="product.color" :style="{ backgroundColor: product.color }" class="product_color_bg">
 
               </span>
             </p>
             <p class="title">
-              <span class="product_title">Material: </span>Lorem
+              <span class="product_title">Material:
+              </span>{{ product.material.charAt(0).toUpperCase() + product.material.substr(1) }}
             </p>
             <div class="title mb-5">
-              <p class="product_title mb-2">Description: </p> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Veniam consequatur tempore eaque fuga sed enim illum reiciendis unde! Rem consequuntur harum ut nobis odit
-              natus quaerat magnam, voluptate totam qui!
+              <p class="product_title mb-2">Description: </p> {{ product.description }}
             </div>
             <v-btn class="headline">Edit</v-btn>
             <v-btn class="headline">Buy</v-btn>
@@ -40,8 +40,12 @@
 
 <script>
   export default {
-    data() {
-      return {}
+    props: ['id'],
+    computed: {
+      product() {
+        const id = this.id;
+        return this.$store.getters.productById(id);
+      }
     }
   }
 </script>
