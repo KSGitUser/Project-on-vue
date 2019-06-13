@@ -22,7 +22,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="teal lighten-3" @click="onSubmit" :disabled="!valid">Create Account</v-btn>
+            <v-btn color="teal lighten-3" @click="onSubmit" :disabled="!valid || loading" :loading="loading">Create
+              Account</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -52,6 +53,11 @@
         ]
       }
     },
+    computed: {
+      loading() {
+        return this.$store.getters.loading;
+      }
+    },
     methods: {
       onSubmit() {
         if (this.$refs.form.validate()) {
@@ -59,7 +65,11 @@
             email: this.email,
             password: this.password
           }
-          console.log(user);
+          this.$store.dispatch('registerUser', user)
+            .then(() => {
+              this.$router.push('/');
+            })
+            .catch(err => console.log(err));
         }
       }
     }
