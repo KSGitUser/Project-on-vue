@@ -43,7 +43,8 @@
         <v-layout>
           <v-flex xs12>
             <v-spacer></v-spacer>
-            <v-btn :disabled="!valid" class="success" @click="createProduct">Create Product</v-btn>
+            <v-btn :disabled="!valid || loading" class="success" :loading="loading" @click="createProduct">Create
+              Product</v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -65,6 +66,11 @@
         valid: false
       }
     },
+    computed: {
+      loading() {
+        return this.$store.getters.loading
+      }
+    },
     methods: {
       createProduct() {
         if (this.$refs.form.validate()) {
@@ -79,7 +85,11 @@
             imageSrc: 'https://image.ibb.co/g6czu8/HP_Omen_17.jpg'
           }
 
-          this.$store.dispatch('createProduct', product);
+          this.$store.dispatch('createProduct', product)
+            .then(() => {
+              this.$router.push('/list')
+            })
+            .catch(() => {})
         }
       }
     }
